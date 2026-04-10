@@ -21,15 +21,11 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Navigate to the web root
-            cd /var/www/html
+            # 1. Go into the actual repository folder
+             cd /var/www/html/CI-CD
             
-            # Pull the latest changes
+            # 2. Pull the changes directly into this folder
             git pull origin main
             
-            # Option A: If you want the site to load directly from the IP,
-            # we copy the contents of ci-cd to the root.
-            sudo cp -r ci-cd/* .
-            
-            # Restart Nginx
+            # 3. Restart Nginx
             sudo systemctl restart nginx
